@@ -1,0 +1,62 @@
+##### POWER METER fom https://halfforked.wordpress.com/2018/05/18/low-cost-house-power-monitoring-with-pzem-004-for-home-assistant/
+##### This my my personal excerpt with my naming convention "PowerMeter" your setup may vary.
+#####
+##### Put the below part in the sensor section of your configuation.yaml file.
+
+sensor:
+
+  - platform: mqtt
+    name: "Voltage"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Voltage }}"
+    unit_of_measurement: "V"
+    icon: mdi:flash
+  - platform: mqtt
+    name: "Current"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Current }}"
+    unit_of_measurement: "A"
+    icon: mdi:power-socket
+  - platform: mqtt
+    name: "Power"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Power }}"
+    unit_of_measurement: "W"
+    icon: mdi:power-plug
+  - platform: mqtt
+    name: "Power Factor"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Factor }}"
+    icon: mdi:percent
+  - platform: mqtt
+    name: "Energy Today"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Today }}"
+    unit_of_measurement: "kWh"
+    icon: mdi:calendar-today
+  - platform: mqtt
+    name: "Energy Yesterday"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Yesterday }}"
+    unit_of_measurement: "kWh"
+    icon: mdi:calendar-today
+  - platform: mqtt
+    name: "Energy Total"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Total }}"
+    unit_of_measurement: "kWh"
+    icon: mdi:calendar-blank
+
+##### This part is only needed if you have the DHT22 aka (S17021) sensor #####
+  - platform: mqtt
+    name: "Tele Temperature"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['SI7021'].Temperature }}"
+    unit_of_measurement: "°C"
+    icon: mdi:thermometer
+  - platform: mqtt
+    name: "Tele Humidity"
+    state_topic: "tele/PowerMeter/SENSOR"
+    value_template: "{{ value_json['SI7021'].Humidity }}"
+    unit_of_measurement: "%"
+    icon: mdi:water-percent
